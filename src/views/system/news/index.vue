@@ -335,7 +335,7 @@ export default {
       this.imageList = [
         {
           url: this.form.image,
-          name: 'banner.png'
+          name: 'news.png'
         }
       ]
       return true
@@ -366,13 +366,13 @@ export default {
     finish() {
       this.$refs.cropper.getCropBlob((data) => {
         this.uploading = true
-        upload(this.uploadUrl, data).then(res => {
+        upload(`${this.uploadUrl}?storeCdn=true`, data).then(res => {
           this.uploading = false
-          this.form.image = `${process.env.VUE_APP_BASE_API}/${res.data.relativePath}`
+          this.form.image = `${res.data.fullPath}`
           this.imageList = [
             {
               url: this.form.image,
-              name: 'banner.png'
+              name: 'news.png'
             }
           ]
           this.cropperDialogVisible = false
@@ -384,7 +384,7 @@ export default {
       this.imageList = [
         {
           url: this.form.image,
-          name: 'banner.png'
+          name: 'news.png'
         }
       ]
     }
